@@ -1,0 +1,366 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevOps & Cloud Engineer Resume</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f6f8;
+      color: #222;
+      line-height: 1.35;
+    }
+
+    .resume {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 20px auto;
+      padding: 16mm;
+      background: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.12);
+    }
+
+    header {
+      border-bottom: 2px solid #222;
+      padding-bottom: 10px;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 28px;
+      letter-spacing: 0.5px;
+    }
+
+    .title {
+      font-size: 15px;
+      font-weight: bold;
+      margin-top: 4px;
+    }
+
+    .contact {
+      margin-top: 7px;
+      font-size: 11px;
+      color: #444;
+    }
+
+    h2 {
+      font-size: 13px;
+      text-transform: uppercase;
+      border-bottom: 1px solid #aaa;
+      padding-bottom: 3px;
+      margin: 12px 0 6px;
+      letter-spacing: 0.6px;
+    }
+
+    p {
+      font-size: 11px;
+      margin: 4px 0;
+    }
+
+    .job {
+      margin-bottom: 8px;
+    }
+
+    .job-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11.5px;
+      font-weight: bold;
+    }
+
+    .company {
+      font-weight: bold;
+    }
+
+    .date {
+      white-space: nowrap;
+    }
+
+    ul {
+      margin: 4px 0 0 17px;
+      padding: 0;
+    }
+
+    li {
+      font-size: 10.5px;
+      margin-bottom: 2px;
+    }
+
+    .skills {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px 18px;
+    }
+
+    .skill {
+      font-size: 10.5px;
+    }
+
+    .skill strong {
+      color: #111;
+    }
+
+    .education {
+      font-size: 10.5px;
+      margin-bottom: 3px;
+    }
+
+    @media print {
+      body {
+        background: white;
+      }
+
+      .resume {
+        margin: 0;
+        box-shadow: none;
+        width: 210mm;
+        min-height: 297mm;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="resume">
+
+    <header>
+      <h1>Sine Emma</h1>
+      <div class="title">DEVOPS & CLOUD ENGINEER</div>
+
+      <div class="contact">
+        Edmonton, AB, Canada |
+        email@example.com |
+        +1 780-000-0000 |
+        linkedin.com/in/emmanuel |
+        github.com/emmanuel
+      </div>
+    </header>
+
+
+    <section>
+      <h2>Professional Summary</h2>
+
+      <p>
+        DevOps and Cloud Engineer with 6 years of experience designing, deploying,
+        and maintaining scalable cloud infrastructure and CI/CD pipelines.
+        Hands-on experience with AWS, Terraform, Docker, Kubernetes, GitHub Actions,
+        Linux, Ansible, and cloud security. Experienced in automating infrastructure,
+        containerizing applications, implementing Infrastructure as Code, and
+        improving deployment reliability across development and production environments.
+      </p>
+    </section>
+
+
+    <section>
+      <h2>Technical Skills</h2>
+
+      <div class="skills">
+
+        <div class="skill">
+          <strong>Cloud:</strong>
+          AWS, EC2, ECS, EKS, Fargate, S3, IAM, VPC, ALB,
+          Route 53, CloudFront, ECR, CloudWatch
+        </div>
+
+        <div class="skill">
+          <strong>IaC:</strong>
+          Terraform, Terraform Modules, AWS CloudFormation
+        </div>
+
+        <div class="skill">
+          <strong>Containers:</strong>
+          Docker, Kubernetes, Helm, Amazon EKS, Amazon ECS
+        </div>
+
+        <div class="skill">
+          <strong>CI/CD:</strong>
+          GitHub Actions, Jenkins, Git, GitHub, AWS CodePipeline
+        </div>
+
+        <div class="skill">
+          <strong>Automation:</strong>
+          Ansible, Bash, Python
+        </div>
+
+        <div class="skill">
+          <strong>Monitoring:</strong>
+          CloudWatch, Prometheus, Grafana, ELK
+        </div>
+
+        <div class="skill">
+          <strong>Security:</strong>
+          IAM, Security Groups, Secrets Management,
+          OIDC, least privilege, vulnerability scanning
+        </div>
+
+        <div class="skill">
+          <strong>Operating Systems:</strong>
+          Linux, Ubuntu, Windows Server
+        </div>
+
+      </div>
+    </section>
+
+
+    <section>
+      <h2>Professional Experience</h2>
+
+      <div class="job">
+
+        <div class="job-header">
+          <span class="company">Senior DevOps / Cloud Engineer — ABC Technologies</span>
+          <span class="date">2023 – Present</span>
+        </div>
+
+        <ul>
+          <li>
+            Designed and managed AWS infrastructure using Terraform, including VPC,
+            subnets, IAM, EC2, ECS, ALB, S3, ECR, and Route 53.
+          </li>
+
+          <li>
+            Built CI/CD pipelines with GitHub Actions to automatically build,
+            test, scan, and deploy Docker applications to AWS.
+          </li>
+
+          <li>
+            Containerized applications with Docker and deployed production workloads
+            using ECS Fargate and Kubernetes/EKS.
+          </li>
+
+          <li>
+            Implemented ECS service autoscaling, load balancing, health checks,
+            CloudWatch monitoring, and centralized application logging.
+          </li>
+
+          <li>
+            Implemented GitHub Actions OIDC authentication with AWS to eliminate
+            long-lived cloud credentials from CI/CD pipelines.
+          </li>
+
+          <li>
+            Automated infrastructure provisioning and configuration management,
+            reducing manual deployment effort and improving environment consistency.
+          </li>
+        </ul>
+
+      </div>
+
+
+      <div class="job">
+
+        <div class="job-header">
+          <span class="company">Cloud / DevOps Engineer — XYZ Solutions</span>
+          <span class="date">2020 – 2023</span>
+        </div>
+
+        <ul>
+          <li>
+            Managed AWS environments and supported highly available applications
+            across multiple environments.
+          </li>
+
+          <li>
+            Developed Terraform configurations and reusable modules for cloud
+            infrastructure provisioning.
+          </li>
+
+          <li>
+            Created Docker images and integrated automated testing and deployment
+            into CI/CD workflows.
+          </li>
+
+          <li>
+            Administered Linux systems, troubleshooting application, networking,
+            storage, and infrastructure issues.
+          </li>
+
+          <li>
+            Used Ansible and Bash scripting to automate server configuration,
+            deployments, and operational tasks.
+          </li>
+        </ul>
+
+      </div>
+
+
+      <div class="job">
+
+        <div class="job-header">
+          <span class="company">Junior DevOps / Cloud Engineer — Technology Company</span>
+          <span class="date">2019 – 2020</span>
+        </div>
+
+        <ul>
+          <li>
+            Supported development and operations teams with Linux administration,
+            Git workflows, Docker, and cloud infrastructure.
+          </li>
+
+          <li>
+            Assisted with CI/CD pipeline development, deployment automation,
+            monitoring, and production troubleshooting.
+          </li>
+        </ul>
+
+      </div>
+
+    </section>
+
+
+    <section>
+      <h2>Selected Cloud Project</h2>
+
+      <p>
+        <strong>AWS Containerized Web Platform:</strong>
+        Designed a production-style AWS architecture using Terraform,
+        Docker, Amazon ECR, ECS Fargate, Application Load Balancer,
+        Route 53, CloudFront, S3, IAM, and CloudWatch. Implemented
+        automated GitHub Actions CI/CD with Docker image build, testing,
+        security scanning, and ECS deployment.
+      </p>
+    </section>
+
+
+    <section>
+      <h2>Education</h2>
+
+      <div class="education">
+        <strong>Bachelor of Science in Computer Science</strong> —
+        University of Rwanda
+      </div>
+
+      <div class="education">
+        <strong>Master of Science in Data Science</strong> —
+        University of Rwanda
+      </div>
+    </section>
+
+
+    <section>
+      <h2>Certifications</h2>
+
+      <p>
+        AWS Certified Cloud Practitioner |
+        AWS Cloud / DevOps Training |
+        Terraform |
+        Docker |
+        Kubernetes
+      </p>
+    </section>
+
+  </div>
+
+</body>
+</html>
+```
