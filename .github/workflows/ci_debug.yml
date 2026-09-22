@@ -1,58 +1,106 @@
-name: Build and Push Image
 
-on:
-  push:
-    branches:
-      - main
+# name: Build and Push Image
 
-permissions:
-  id-token: write
-  contents: read
+# on:
+#   push:
+#     branches:
+#       - main
 
-jobs:
+# permissions:
+#   id-token: write
+#   contents: read
 
-  build:
-    runs-on: ubuntu-latest
+# jobs:
 
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+#   build:
+#     runs-on: ubuntu-latest
 
-      # Temporary step to see the OIDC token claims
-      - name: Get OIDC Token Claims
-        id: oidc
-        run: |
-          echo "Requesting OIDC token..."
+#     steps:
+#       - name: Checkout Code
+#         uses: actions/checkout@v4
 
-          RESPONSE=$(curl -s \
-            -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
-            "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=sts.amazonaws.com")
+#       # Temporary step to see the OIDC token claims
+#       - name: Get OIDC Token Claims
+#         id: oidc
+#         run: |
+#           echo "Requesting OIDC token..."
 
-          TOKEN=$(echo "$RESPONSE" | jq -r '.value')
+#           RESPONSE=$(curl -s \
+#             -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
+#             "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=sts.amazonaws.com")
 
-          echo "$TOKEN" | cut -d '.' -f2 | base64 -d 2>/dev/null | jq .
+#           TOKEN=$(echo "$RESPONSE" | jq -r '.value')
 
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v6.2.4
-        with:
-          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
-          aws-region: ${{ vars.AWS_REGION }}
-          audience: sts.amazonaws.com
+#           echo "$TOKEN" | cut -d '.' -f2 | base64 -d 2>/dev/null | jq .
 
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v2
+#       - name: Configure AWS Credentials
+#         uses: aws-actions/configure-aws-credentials@v6.2.4
+#         with:
+#           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+#           aws-region: ${{ vars.AWS_REGION }}
+#           audience: sts.amazonaws.com
 
-      - name: Build Docker Image
-        run: |
-          docker build -t ${{ vars.ECR_REPOSITORY }} .
+#       - name: Login to Amazon ECR
+#         id: login-ecr
+#         uses: aws-actions/amazon-ecr-login@v2
 
-      - name: Tag Docker Image
-        run: |
-          docker tag ${{ vars.ECR_REPOSITORY }}:latest \
-            ${{ steps.login-ecr.outputs.registry }}/${{ vars.ECR_REPOSITORY }}:latest
+#       - name: Build Docker Image
+#         run: |
+#           docker build -t ${{ vars.ECR_REPOSITORY }} .
 
-      - name: Push Docker Image
-        run: |
-          docker push \
-            ${{ steps.login-ecr.outputs.registry }}/${{ vars.ECR_REPOSITORY }}:latest
+#       - name: Tag Docker Image
+#         run: |
+#           docker tag ${{ vars.ECR_REPOSITORY }}:latest \
+#             ${{ steps.login-ecr.outputs.registry }}/${{ vars.ECR_REPOSITORY }}:latest
+
+#       - name: Push Docker Image
+#         run: |
+#           docker push \
+#             ${{ steps.login-ecr.outputs.registry }}/${{ vars.ECR_REPOSITORY }}:lates
+
+   
+#   deploy:
+#     runs-on: ubuntu-latest
+ 
+#     steps:
+#       - name: Checkout Code
+#         uses: actions/checkout@v4
+
+#       - name: Configure AWS Credentials
+#         uses: aws-actions/configure-aws-credentials@v4
+
+#         with:
+#           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+#           aws-region: ${{ vars.AWS_REGION }}
+#           audience: sts.amazonaws.com  
+
+
+#       - name: Login to Amazon ECR
+#         id: login-ecr
+#         uses: aws-actions/amazon-ecr-login@v2
+
+ 
+#       - name: Build Docker Image
+#         run: |
+#           docker build -t ${{ vars.ECR_REPOSITORY }} .
+#       - name: Tag Docker Image
+#         run: |
+#           docker tag ${{ vars.ECR_REPOSITORY }}:latest \
+#           ${{ steps.login-ecr.outputs.registry }}/${{ vars.ECR_REPOSITORY }}:${{ github.sha }}
+
+#       - name: Push Docker Image to ECR
+#         run: |
+#           docker push \
+#           ${{ steps.login-ecr.outputs.registry }}/${{ vars.ECR_REPOSITORY }}:${{ github.sha }}
+
+#       - name: Update ECS Service
+#         run: |
+
+#           aws ecs update-service \ 
+#             --cluster nginx-cluster \ # replcae cluster and put yours
+#             --service nginx-service \  #replcae clusterservice and put yours
+#             --force-new-deployment
+
+
+  
+         
