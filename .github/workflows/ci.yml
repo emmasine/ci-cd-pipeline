@@ -1,0 +1,58 @@
+name: Build and Push Image
+on:
+  push:
+    branches:
+      - main
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: DEBUG - ARN account
+        run: |
+          echo "COMPTE VISE PAR LE SECRET = $(echo "$ARN" | cut -d: -f5)"
+          echo "NOM DU ROLE = $(echo "$ARN" | cut -d/ -f2)"
+          echo "LONGUEUR = ${#ARN}"
+        env:
+          ARN: ${{ secrets.AWS_ROLE_ARN }}
+
+      - name: DEBUG - OIDC claims
+        run: |
+          TOKEN=$(curl -sS \
+            -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" \
+            "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=sts.amazonaws.com" | jq -r '.value')
+          P=$(echo "$TOKEN" | cut -d. -f2)
+          case $((${#P} % 4)) in 2) P="$P==";; 3) P="$P=";; esac
+          echo "$P" | base64 -d | jq '{sub, aud, iss, repository}'
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v6.2.4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION }}
+          audience: sts.amazonaws.com
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build Docker Image
+        run: |
+          docker build -t ${{ vars.ECR_REPOSITORY }} .
+
+      - name: Tag Docker Image
+        run: |
+          docker tag ${{ vars.ECR_REPOSITORY }}:latest \
+            ${{ steps.login-ecr.outputs.registry }}/${{ vars.ECR_REPOSITORY }}:latest
+
+      - name: Push Docker Image
+        run: |
+          docker push \
+            ${{ steps.login-ecr.outputs.registry }}/${{ vars.ECR_REPOSITORY }}:latest
