@@ -45,12 +45,13 @@ jobs:
 
 
   deploy:
+    needs: build
     runs-on: ubuntu-latest
  
     steps:
 
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v6.2.4
         with:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           aws-region: ${{ vars.AWS_REGION }}
@@ -59,11 +60,12 @@ jobs:
 
       - name: Update ECS Service
         run: |
-
-          aws ecs update-service \ 
-            --cluster nginx-cluster \ # replcae cluster and put yours
-            --service nginx-service \  #replcae clusterservice and put yours
+    
+          aws ecs update-service \
+            --cluster nginx-cluster \
+            --service nginx-service \
             --force-new-deployment
+
 
 
   
